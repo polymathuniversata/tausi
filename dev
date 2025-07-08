@@ -1,0 +1,3 @@
+#!/bin/bash
+# Convenience script - calls scripts/dev.sh
+exec ./scripts/dev.sh "$@"

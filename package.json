@@ -1,0 +1,57 @@
+{
+  "name": "tausi",
+  "version": "1.0.0",
+  "description": "LLM-friendly minimal scaffolding tool for Vite + Tailwind + Express + Firebase stack",
+  "main": "dist/index.js",
+  "bin": {
+    "tausi": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "bun build src/cli.ts --outdir dist --target bun",
+    "dev": "bun run src/cli.ts",
+    "start": "bun run dist/cli.js",
+    "test": "bun test",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts",
+    "gui": "cd gui && bun server.js",
+    "gui:dev": "cd gui && bun --watch server.js"
+  },
+  "keywords": [
+    "scaffolding",
+    "cli",
+    "minimal",
+    "vite",
+    "tailwind",
+    "express",
+    "firebase",
+    "railway",
+    "render",
+    "llm-friendly"
+  ],
+  "author": "Emertech Labs",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0",
+    "commander": "^11.0.0",
+    "express": "^4.18.0",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^7.0.0"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "files": [
+    "dist/**/*",
+    "templates/**/*",
+    "README.md",
+    "LICENSE"
+  ]
+}
