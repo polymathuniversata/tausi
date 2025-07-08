@@ -30,6 +30,14 @@
   ],
   "author": "Emertech Labs",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/polymathuniversata/tausi.git"
+  },
+  "homepage": "https://github.com/polymathuniversata/tausi#readme",
+  "bugs": {
+    "url": "https://github.com/polymathuniversata/tausi/issues"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
