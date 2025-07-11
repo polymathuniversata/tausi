@@ -4,7 +4,7 @@
   "description": "LLM-friendly minimal scaffolding tool for Vite + Tailwind + Express + Firebase stack",
   "main": "dist/index.js",
   "bin": {
-    "tausi": "./dist/cli.js"
+    "tausi": "dist/cli.js"
   },
   "scripts": {
     "build": "bun build src/cli.ts --outdir dist --target bun",
@@ -32,7 +32,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/polymathuniversata/tausi.git"
+    "url": "git+https://github.com/polymathuniversata/tausi.git"
   },
   "homepage": "https://github.com/polymathuniversata/tausi#readme",
   "bugs": {
