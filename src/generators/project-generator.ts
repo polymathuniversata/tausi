@@ -90,9 +90,9 @@ export class ProjectGenerator {
     // Sample component
     await this.writeFile(path.join(frontendDir, 'src', 'components', 'App.js'), this.getAppComponent());
     
-    // Utils - temporarily disabled
+    // Utils
     if (this.config.includeAuth) {
-      // await this.writeFile(path.join(frontendDir, 'src', 'utils', 'auth.js'), this.getAuthUtils());
+      await this.writeFile(path.join(frontendDir, 'src', 'utils', 'auth.js'), this.getAuthUtils());
     }
     // await this.writeFile(path.join(frontendDir, 'src', 'utils', 'api.js'), this.getApiUtils());
     
@@ -911,6 +911,72 @@ export async function verifyToken(token) {
 }
 
 export const adminAuth = admin.auth();`;
+  }
+
+  private getAuthUtils() {
+    return `import { initializeApp } from 'firebase/app';
+import { 
+  getAuth, 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut as firebaseSignOut,
+  onAuthStateChanged
+} from 'firebase/auth';
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Auth utilities
+export async function signIn(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error) {
+    throw new Error(\`Sign in failed: \${error.message}\`);
+  }
+}
+
+export async function signUp(email, password) {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error) {
+    throw new Error(\`Sign up failed: \${error.message}\`);
+  }
+}
+
+export async function signOut() {
+  try {
+    await firebaseSignOut(auth);
+  } catch (error) {
+    throw new Error(\`Sign out failed: \${error.message}\`);
+  }
+}
+
+export function onAuthChange(callback) {
+  return onAuthStateChanged(auth, callback);
+}
+
+export async function getAuthToken() {
+  const user = auth.currentUser;
+  if (user) {
+    return await user.getIdToken();
+  }
+  return null;
+}
+
+export { auth };`;
   }
 
   private getArchitectureDoc() {
